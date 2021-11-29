@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.group2.xxx.dao.UserMapper">
+
+    <sql id="Base_Column_List" >
+        user_id,nick_name,login_name,password_md5,introduce_sign,is_deleted,locked_flag,create_time
+    </sql>
+
+
+    <!-- 按名字查找用户 -->
+    <select id="queryUserByName" resultType="com.group2.xxx.entity.User">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        user
+        where
+        login_name = #{userName}
+    </select>
+
+
+    <!-- 分页查询 -->
+    <select id="selectPage" resultType="com.group2.xxx.entity.User">
+        select *
+        from user
+    </select>
+
+
+</mapper>
