@@ -1,4 +1,4 @@
-package com.group2.xxx.utils;
+package com.group2.dingmall.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

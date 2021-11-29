@@ -1,4 +1,4 @@
-package com.group2.xxx.controller.mall.model;
+package com.group2.dingmall.controller.mall.vo;
 
 
 
@@ -18,15 +18,13 @@ import java.io.Serializable;
  * 用户登录param
  */
 @Data
-public class UserLoginModel implements Serializable {
+public class UserLoginVO implements Serializable {
 
     @ApiModelProperty("登录名")
     private String loginName;
 
-    @ApiModelProperty("用户密码(需要MD5加密)")
-    private String passwordMd5;
 
-    @ApiModelProperty("用户ID")
-    private long userId;
+    @ApiModelProperty("用户ID(需要加密)")
+    private String  userIdMd5;
 
 }

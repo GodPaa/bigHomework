@@ -1,7 +1,7 @@
-package com.group2.xxx.service;
+package com.group2.dingmall.service;
 
 
-import com.group2.xxx.controller.mall.model.UserLoginModel;
+import com.group2.dingmall.controller.mall.vo.UserLoginVO;
 
 public interface UserService {
 
@@ -19,6 +19,7 @@ public interface UserService {
      * @param loginName
      * @param passwordMD5
      */
-    UserLoginModel login(String loginName, String passwordMD5);
+    UserLoginVO login(String loginName, String passwordMD5);
 
+    void register(String loginName, String password);
 }

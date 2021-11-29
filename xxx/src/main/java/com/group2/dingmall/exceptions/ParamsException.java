@@ -1,4 +1,4 @@
-package com.group2.xxx.exceptions;
+package com.group2.dingmall.exceptions;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,9 +1,8 @@
-package com.group2.xxx.dao;
+package com.group2.dingmall.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.group2.xxx.entity.User;
+import com.group2.dingmall.po.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 @Mapper
 //@Repository
@@ -19,7 +18,7 @@ public interface UserMapper extends BaseMapper<User> {
      * 也可以通过 xml 自定义 sql 查询语句
      */
     // 通过用户名查询用户记录，返回用户对象
-    public User queryUserByName(String userName);
+    public User queryUserByName(String loginName);
 
 
 }

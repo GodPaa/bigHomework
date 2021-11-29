@@ -1,4 +1,4 @@
-package com.group2.xxx;
+package com.group2.dingmall;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

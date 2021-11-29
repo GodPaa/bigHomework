@@ -1,7 +1,7 @@
-package com.group2.xxx.utils;
+package com.group2.dingmall.utils;
 
 
-import com.group2.xxx.exceptions.ParamsException;
+import com.group2.dingmall.exceptions.ParamsException;
 
 
 

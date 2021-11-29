@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: 123
-    url: jdbc:mysql:///xxx?characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql:///dingmall?characterEncoding=utf8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     hiddenmethod:
