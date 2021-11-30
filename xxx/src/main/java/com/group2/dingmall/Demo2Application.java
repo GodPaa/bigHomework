@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
-@MapperScan("com.group2.xxx.mapper")//指向你的mapper接口类
+//指定mapper接口类的位置
 @EnableSwagger2
 public class Demo2Application {
 

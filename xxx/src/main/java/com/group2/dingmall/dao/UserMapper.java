@@ -20,5 +20,7 @@ public interface UserMapper extends BaseMapper<User> {
     // 通过用户名查询用户记录，返回用户对象
     public User queryUserByName(String loginName);
 
+    public int updateByPrimaryKeySelective(User user);
+
 
 }

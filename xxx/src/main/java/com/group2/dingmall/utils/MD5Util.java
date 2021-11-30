@@ -1,6 +1,11 @@
 package com.group2.dingmall.utils;
 
+import com.group2.dingmall.exceptions.ParamsException;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
+import java.util.Base64;
 
 /**
  * @author 13
@@ -39,9 +44,12 @@ public class MD5Util {
                 resultString = byteArrayToHexString(md.digest(resultString
                         .getBytes(charsetname)));
         } catch (Exception exception) {
+            throw new ParamsException("加密出现错误");
         }
         return resultString;
     }
+
+
 
     private static final String hexDigits[] = {"0", "1", "2", "3", "4", "5",
             "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};

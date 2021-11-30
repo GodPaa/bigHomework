@@ -1,12 +1,16 @@
 package com.group2.dingmall.controller.mall;
 
+import com.group2.dingmall.config.annotation.TokenToUser;
 import com.group2.dingmall.controller.mall.param.UserRegisterParam;
+import com.group2.dingmall.controller.mall.param.UserUpdateParam;
 import com.group2.dingmall.controller.mall.vo.UserLoginVO;
 import com.group2.dingmall.controller.mall.param.UserLoginParam;
+import com.group2.dingmall.po.User;
 import com.group2.dingmall.utils.Result;
 import com.group2.dingmall.service.impl.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,7 +24,6 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin
 @Api(tags = "用户管理相关接口")
-@RequestMapping("/user")
 public class UserController {
 
     @Resource
@@ -28,7 +31,7 @@ public class UserController {
 
     // 登录请求
     @PostMapping("/login")
-    @ApiOperation(value = "登录接口", notes = "返回加密过的Id和用户名")
+    @ApiOperation(value = "登录接口", notes = "返回token")
     public Result userLogin(@Valid UserLoginParam user){
 
         // 实例化统一响应结果
@@ -47,7 +50,7 @@ public class UserController {
     // 注册请求
     @PostMapping("/register")
     @ApiOperation(value = "用户注册", notes = "")
-    public Result register(@Valid UserRegisterParam userRegisterParam) {
+    public Result register(@ApiParam("用户注册信息") @Valid UserRegisterParam userRegisterParam) {
 
         Result result = new Result<>();
 
@@ -58,6 +61,27 @@ public class UserController {
         return result;
     }
 
+    // 修改用户信息
+    @PutMapping("/user/info")
+    @ApiOperation(value = "修改用户信息", notes = "")
+    public Result updateInfo(@ApiParam("用户更新信息") @Valid  UserUpdateParam userUpdateParam, @TokenToUser User user) {
+
+        Result result = new Result();
+
+        userServiceImpl.update(userUpdateParam,user.getUserId());
+
+        return result;
+    }
+
+    // 获取用户信息
+//    @GetMapping("/user/info")
+//    @ApiOperation(value = "获取用户信息", notes = "")
+//    public Result<NewBeeMallUserVO> getUserDetail(@TokenToMallUser MallUser loginMallUser) {
+//        //已登录则直接返回
+//        NewBeeMallUserVO mallUserVO = new NewBeeMallUserVO();
+//        BeanUtil.copyProperties(loginMallUser, mallUserVO);
+//        return ResultGenerator.genSuccessResult(mallUserVO);
+//    }
 
 
 

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-
 @ApiModel(description = "用户字段")
 public class User {
   // 主键，自增 ，不加注解找不到主键

@@ -20,11 +20,9 @@ import java.io.Serializable;
 @Data
 public class UserLoginVO implements Serializable {
 
-    @ApiModelProperty("登录名")
-    private String loginName;
+    @ApiModelProperty("token")
+    private String token;
 
 
-    @ApiModelProperty("用户ID(需要加密)")
-    private String  userIdMd5;
 
 }

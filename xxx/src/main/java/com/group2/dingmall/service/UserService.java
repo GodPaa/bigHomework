@@ -1,25 +1,29 @@
 package com.group2.dingmall.service;
 
 
+import com.group2.dingmall.controller.mall.param.UserUpdateParam;
 import com.group2.dingmall.controller.mall.vo.UserLoginVO;
 
 public interface UserService {
 
     /**
-     登录
-     1. 参数判断，判断用户姓名、用户密码非空弄
-     如果参数为空，抛出异常（异常被控制层捕获并处理）
-     2. 调用数据访问层，通过用户名查询用户记录，返回用户对象
-     3. 判断用户对象是否为空
-     如果对象为空，抛出异常（异常被控制层捕获并处理）
-     4. 判断密码是否正确，比较客户端传递的用户密码与数据库中查询的用户对象中的用户密码
-     如果密码不相等，抛出异常（异常被控制层捕获并处理）
-     5. 如果密码正确，登录成功
-
+     * 登录
      * @param loginName
      * @param passwordMD5
+     * @return
      */
     UserLoginVO login(String loginName, String passwordMD5);
 
+    /**
+     * 注册
+     * @param loginName
+     * @param password
+     */
     void register(String loginName, String password);
+
+    /**
+     * 更改用户信息（不能改loginName）
+     * @param userUpdateParam
+     */
+    void update(UserUpdateParam userUpdateParam,long userId);
 }
