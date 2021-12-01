@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.group2.dingmall.dao.UserMapper">
+
+    <sql id="Base_Column_List" >
+        user_id,nick_name,login_name,password_md5,introduce_sign,is_deleted,locked_flag,create_time
+    </sql>
+
+
+    <!-- 按名字查找用户 -->
+    <select id="queryUserByName" resultType="com.group2.dingmall.po.User">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        user
+        where
+        login_name = #{loginName}
+    </select>
+
+    <!-- 根据id选择更新 -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.group2.dingmall.po.User">
+        update user
+        <set>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordMd5 != null">
+                password_md5 = #{passwordMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="introduceSign != null">
+                introduce_sign = #{introduceSign,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="lockedFlag != null">
+                locked_flag = #{lockedFlag,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+</mapper>
