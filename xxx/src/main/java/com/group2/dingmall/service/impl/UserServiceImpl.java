@@ -108,6 +108,15 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * 用户退出， 清楚token
+     * @param userId
+     */
+    @Override
+    public void logout(long userId) {
+        userTokenMapper.deleteById(userId);
+    }
+
 
     /************************   封装的方法   ************************/
 

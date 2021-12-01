@@ -23,6 +23,7 @@ import javax.validation.Valid;
  **/
 @RestController
 @CrossOrigin
+@RequestMapping("user")
 @Api(tags = "用户管理相关接口")
 public class UserController {
 
@@ -62,7 +63,7 @@ public class UserController {
     }
 
     // 修改用户信息
-    @PutMapping("/user/info")
+    @PutMapping("/info")
     @ApiOperation(value = "修改用户信息", notes = "")
     public Result updateInfo(@ApiParam("用户更新信息") @Valid  UserUpdateParam userUpdateParam, @TokenToUser User user) {
 
@@ -73,15 +74,16 @@ public class UserController {
         return result;
     }
 
-    // 获取用户信息
-//    @GetMapping("/user/info")
-//    @ApiOperation(value = "获取用户信息", notes = "")
-//    public Result<NewBeeMallUserVO> getUserDetail(@TokenToMallUser MallUser loginMallUser) {
-//        //已登录则直接返回
-//        NewBeeMallUserVO mallUserVO = new NewBeeMallUserVO();
-//        BeanUtil.copyProperties(loginMallUser, mallUserVO);
-//        return ResultGenerator.genSuccessResult(mallUserVO);
-//    }
+    // 用户退出
+    @PostMapping("/logout")
+    @ApiOperation(value = "登出接口", notes = "清除token")
+    public Result<String> logout(@TokenToUser User user) {
+        Result result = new Result();
+        userServiceImpl.logout(user.getUserId());
+        return result;
+    }
+
+
 
 
 

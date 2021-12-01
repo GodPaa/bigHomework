@@ -26,4 +26,10 @@ public interface UserService {
      * @param userUpdateParam
      */
     void update(UserUpdateParam userUpdateParam,long userId);
+
+    /**
+     * 用户退出 （清楚token）
+     * @param userId
+     */
+    void logout(long userId);
 }
