@@ -8,5 +8,37 @@
 <mapper namespace="com.group2.dingmall.dao.BookMapper">
 
 
+    <select id="searchBookPage" resultType="com.group2.dingmall.controller.mall.vo.BookInfoVO">
+        select *
+        from book
+
+        <where>
+                book_status = 0
+            <if test="bookSearchParam.keyword!=null and bookSearchParam.keyword!=''">
+                and (book_name like CONCAT('%',#{bookSearchParam.keyword},'%') or book_intro like CONCAT('%',#{bookSearchParam.keyword},'%') or book_author like CONCAT('%',#{bookSearchParam.keyword},'%'))
+            </if>
+            <if test="bookSearchParam.bookType!=null and bookSearchParam.bookType!=''">
+                and book_type = #{bookSearchParam.bookType}
+            </if>
+            <if test="bookSearchParam.bookAuthor!=null and bookSearchParam.bookAuthor!=''">
+                and book_author like CONCAT('%',#{bookSearchParam.bookAuthor},'%')
+            </if>
+        </where>
+        <if test="bookSearchParam.orderBy!=null and bookSearchParam.orderBy!=''">
+            <choose>
+                <when test="bookSearchParam.orderBy == 'time'">
+                    /* 最新 */
+                    order by book_id desc
+                </when>
+                <when test="bookSearchParam.orderBy == 'price'">
+                    /* 最便宜 */
+                    order by book_price asc
+                </when>
+                <otherwise>
+                    order by book_id asc
+                </otherwise>
+            </choose>
+        </if>
+    </select>
 
 </mapper>
