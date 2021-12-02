@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class User {
   // 主键，自增 ，不加注解找不到主键
   @TableId(value = "user_id",type = IdType.AUTO)
-  private long userId;
+  private Long userId;
   private String nickName;
   private String loginName;
   private String passwordMd5;
