@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.group2.dingmall.dao.BookMapper">
+
+
+    <select id="searchBookPage" resultType="com.group2.dingmall.controller.mall.vo.BookInfoVO">
+        select *
+        from book
+
+        <where>
+                book_status = 0
+            <if test="bookSearchParam.keyword!=null and bookSearchParam.keyword!=''">
+                and (book_name like CONCAT('%',#{bookSearchParam.keyword},'%') or book_intro like CONCAT('%',#{bookSearchParam.keyword},'%') or book_author like CONCAT('%',#{bookSearchParam.keyword},'%'))
+            </if>
+            <if test="bookSearchParam.bookType!=null and bookSearchParam.bookType!=''">
+                and book_type = #{bookSearchParam.bookType}
+            </if>
+            <if test="bookSearchParam.bookAuthor!=null and bookSearchParam.bookAuthor!=''">
+                and book_author like CONCAT('%',#{bookSearchParam.bookAuthor},'%')
+            </if>
+        </where>
+        <if test="bookSearchParam.orderBy!=null and bookSearchParam.orderBy!=''">
+            <choose>
+                <when test="bookSearchParam.orderBy == 'time'">
+                    /* 最新 */
+                    order by book_id desc
+                </when>
+                <when test="bookSearchParam.orderBy == 'price'">
+                    /* 最便宜 */
+                    order by book_price asc
+                </when>
+                <otherwise>
+                    order by book_id asc
+                </otherwise>
+            </choose>
+        </if>
+    </select>
+    <!-- 获取书本类别列表 -->
+    <select id="getBookCategories" resultType="java.lang.String">
+        select book_type from book
+        where book_status=1
+        group by book_type;
+    </select>
+
+
+    <!-- 获取某一类的所有书籍 -->
+    <select id="getBookPageByType" resultType="com.group2.dingmall.controller.mall.vo.BookInfoVO">
+        select * from book
+        where
+              book_type = #{bookType}
+          and book_status = 1
+    </select>
+
+
+
+
+</mapper>

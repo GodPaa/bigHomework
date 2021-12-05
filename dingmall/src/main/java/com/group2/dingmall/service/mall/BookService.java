@@ -6,6 +6,8 @@ import com.group2.dingmall.controller.mall.param.BookSearchParam;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
 import com.group2.dingmall.po.User;
 
+import java.util.List;
+
 public interface BookService {
     /**
      * 获取单个书本的信息
@@ -20,4 +22,17 @@ public interface BookService {
      * @return
      */
     IPage<BookInfoVO> searchBookPage(Page<BookInfoVO> page,BookSearchParam bookSearchParam);
+
+
+    /**
+     * 获取 list<书本类别> , 用于书本分类页面的 类别导航栏
+     * @return
+     */
+    List<String> getBookCategories();
+
+    /**
+     * 分页获取 list<书本类别> , 用于书本分类页面的 类别导航栏
+     * @return
+     */
+    IPage<BookInfoVO> getBookPageByType(Page<BookInfoVO> page, String bookType);
 }

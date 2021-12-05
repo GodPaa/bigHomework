@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author lv
@@ -85,4 +86,36 @@ public class BookServiceImpl implements BookService {
 
         return pages;
     }
+
+    /**
+     * 用于获取 书本分类页面导航栏的  list<book_type>
+     * @return
+     */
+    @Override
+    public List<String> getBookCategories() {
+        List<String> categoriesList = bookMapper.getBookCategories();
+        return categoriesList;
+    }
+
+    /**
+     * 用于获取 书本分类页面导航栏的  list<book_type>
+     * @return
+     */
+    @Override
+    public IPage<BookInfoVO> getBookPageByType(Page<BookInfoVO> page, String bookType) {
+        bookType = bookType.trim();
+        IPage<BookInfoVO> certainTypeBook = bookMapper.getBookPageByType(page,bookType);
+        AssertUtil.isTrue(certainTypeBook.getTotal() == 0,"没有收录该类图书");
+
+        /* 加上图片url */
+        for (BookInfoVO bookInfoVO : certainTypeBook.getRecords()){
+            String ImgUrl = String.format("http://%s/pic/%s/%s.jpg", IPUtil.getCurrentIP(),bookInfoVO.getBookType(), bookInfoVO.getBookName());
+            bookInfoVO.setBookImgUrl(ImgUrl);
+        }
+
+        return certainTypeBook;
+    }
+
+
+
 }

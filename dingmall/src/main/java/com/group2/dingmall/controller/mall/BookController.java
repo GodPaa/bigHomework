@@ -2,23 +2,19 @@ package com.group2.dingmall.controller.mall;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.group2.dingmall.controller.mall.param.CertainTypeBookParam;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
 import com.group2.dingmall.controller.mall.param.BookSearchParam;
-import com.group2.dingmall.controller.mall.vo.BookInfoVO;
-import com.group2.dingmall.controller.mall.vo.BookInfoVO;
-import com.group2.dingmall.service.mall.BookService;
 import com.group2.dingmall.service.mall.BookServiceImpl;
 import com.group2.dingmall.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Author lv
@@ -56,7 +52,7 @@ public class BookController {
 
     /**
      * 图书查询页面接口
-     *       根据关键字检索书本，返回匹配的多条数据
+     *       根据关键字检索书本，返回多条查询结果
      * @param bookSearchParam
      * @return
      */
@@ -67,10 +63,37 @@ public class BookController {
 
         Page<BookInfoVO> page = new Page<>(bookSearchParam.getPageNumber() , bookSearchParam.getPageSize());
 
-        IPage<BookInfoVO> userIPage =  bookService.searchBookPage(page,bookSearchParam);
+        IPage<BookInfoVO> bookIPage =  bookService.searchBookPage(page,bookSearchParam);
 
-        result.setData(userIPage);
+        result.setData(bookIPage);
 
         return result;
     }
+
+    @GetMapping("/categories")
+    @ApiOperation(value = "图书分类页面的nav接口",notes = "返回list<书本类别>")
+    public Result getBookCategories(){
+        Result result = new Result();
+
+        List<String> categoriesList = bookService.getBookCategories();
+        result.setData(categoriesList);
+        return result;
+    }
+
+
+    @GetMapping("/certainType")
+    @ApiOperation(value = "图书分类页面的主体内容接口",notes = "返回某一类的list<书本>")
+    public Result getBookPageByType(@Valid CertainTypeBookParam certainTypeBookParam){
+        Result result = new Result();
+
+        Page<BookInfoVO> page = new Page<>(certainTypeBookParam.getPageNumber(),certainTypeBookParam.getPageSize());
+
+        IPage<BookInfoVO> bookPage =  bookService.getBookPageByType(page,certainTypeBookParam.getBookType());
+
+        result.setData(bookPage);
+
+        return result;
+    }
+
+
 }
