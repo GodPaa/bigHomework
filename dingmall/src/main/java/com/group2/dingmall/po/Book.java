@@ -1,5 +1,6 @@
 package com.group2.dingmall.po;
 
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
@@ -8,18 +9,26 @@ import lombok.Data;
 public class Book {
 
   // 主键，自增 ，不加注解找不到主键
-  @TableId(value = "book_id",type = IdType.AUTO)
-  private Long bookId;
+  @TableId(value = "id",type = IdType.AUTO)
+  private long id;
   private String bookName;
-  private String bookType;
-  private String bookAuthor;
-  private long bookStock;
-  private long bookPrice;
-  private String bookIntro;
+  private String author;
+  private String publishingHouse;
+  private String translator;
+  private String yearOfPublication;
+  private long pages;
+  private String isbn;
+  private String originalPrice;
+  private String currentPrice;
+  private double score;
+  private long numberOfPeople;
+  private String briefIntroduction;
+  private String authorIntroduction;
+  private String catalog;
+  private String label;
+  private String imgUrl;
   private long bookStatus;
-  private long createUser;
   private java.sql.Timestamp createTime;
-  private long updateUser;
   private java.sql.Timestamp updateTime;
 
 

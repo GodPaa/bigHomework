@@ -57,7 +57,7 @@ public class BookController {
      * @return
      */
     @GetMapping("/search")
-    @ApiOperation(value = "书本搜索接口", notes = "根据关键字、书类别、作者进行检索，也可以按time和price排序")
+    @ApiOperation(value = "书本搜索接口", notes = "根据关键字、书标签、作者进行检索，也可以按time和price排序,默认按评分排序")
     public Result search(BookSearchParam bookSearchParam){
         Result result = new Result();
 

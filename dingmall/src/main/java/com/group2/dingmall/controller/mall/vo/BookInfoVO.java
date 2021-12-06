@@ -17,33 +17,40 @@ import java.io.Serializable;
 @Data
 public class BookInfoVO implements Serializable {
 
-    @ApiModelProperty("书本id")
-    private Long bookId;
-
-    @ApiModelProperty("书本名称")
+    @ApiModelProperty("书本编号")
+    private long id;
+    @ApiModelProperty("书名")
     private String bookName;
-
-    @ApiModelProperty("书本类别")
-    private String bookType;
-
-    @ApiModelProperty("书本作者")
-    private String bookAuthor;
-
-    @ApiModelProperty("书本存量")
-    private long bookStock;
-
-    @ApiModelProperty("书本价格")
-    private long bookPrice;
-
-    @ApiModelProperty("书本简介")
-    private String bookIntro;
-
-    @ApiModelProperty("书本图片地址")
-    private String bookImgUrl;
-
-
-
-
-
-
+    @ApiModelProperty("作者")
+    private String author;
+    @ApiModelProperty("出版社")
+    private String publishingHouse;
+    @ApiModelProperty("书本标签")
+    private String label;
+    @ApiModelProperty("图片地址")
+    private String imgUrl;
+    @ApiModelProperty("书本状态")
+    private long bookStatus;
+    @ApiModelProperty("译者")
+    private String translator;
+    @ApiModelProperty("出版年份")
+    private String yearOfPublication;
+    @ApiModelProperty("总页数")
+    private long pages;
+    @ApiModelProperty("ISBN")
+    private String isbn;
+    @ApiModelProperty("原价")
+    private String originalPrice;
+    @ApiModelProperty("秒杀价")
+    private String currentPrice;
+    @ApiModelProperty("叮叮评分")
+    private double score;
+    @ApiModelProperty("评价人数")
+    private long numberOfPeople;
+    @ApiModelProperty("内容简介")
+    private String briefIntroduction;
+    @ApiModelProperty("作者简介")
+    private String authorIntroduction;
+    @ApiModelProperty("目录")
+    private String catalog;
 }

@@ -21,11 +21,11 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class BookSearchParam {
-    @ApiModelProperty("书本类别")
-    private String bookType;
+    @ApiModelProperty("书本标签")
+    private String label;
 
     @ApiModelProperty("书作者")
-    private String bookAuthor;
+    private String author;
 
     @ApiModelProperty("关键字")
     private String keyword;

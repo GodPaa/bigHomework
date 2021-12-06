@@ -41,9 +41,6 @@ public class BookServiceImpl implements BookService {
         /* 封装返回的data */
         BookInfoVO bookInfoVO = new BookInfoVO();
         BeanUtil.copyProperties(book, bookInfoVO);
-        // 拼接图片访问地址，我放在 Apache 服务器上
-        String ImgUrl = String.format("http://%s/pic/%s/%s.jpg", IPUtil.getCurrentIP(),book.getBookType(), book.getBookName());
-        bookInfoVO.setBookImgUrl(ImgUrl);
         return bookInfoVO;
     }
 
@@ -57,32 +54,26 @@ public class BookServiceImpl implements BookService {
 
         /* 搜索参数都为空，直接返回异常 */
         String keyword = bookSearchParam.getKeyword();
-        String bookType = bookSearchParam.getBookType();
-        String bookAuthor = bookSearchParam.getBookAuthor();
+        String label = bookSearchParam.getLabel();
+        String author = bookSearchParam.getAuthor();
         AssertUtil.isTrue(StringUtils.isBlank(keyword) &&
-                               StringUtils.isBlank(bookType) &&
-                               StringUtils.isBlank(bookAuthor)
+                               StringUtils.isBlank(label) &&
+                               StringUtils.isBlank(author)
                             ,"搜索参数不能为空");
 
         /* 滤去空格 */
         if (keyword != null) {
             bookSearchParam.setKeyword(keyword.trim());
         }
-        if (bookType != null) {
-            bookSearchParam.setBookType(bookType.trim());
+        if (label != null) {
+            bookSearchParam.setLabel(label.trim());
         }
-        if (bookAuthor != null) {
-            bookSearchParam.setBookAuthor(bookAuthor.trim());
+        if (author != null) {
+            bookSearchParam.setAuthor(author.trim());
         }
 
         /* 调用 dao 层的方法 */
         IPage<BookInfoVO> pages = bookMapper.searchBookPage(page,bookSearchParam);
-
-        /* 加上图片url */
-        for (BookInfoVO bookInfoVO : pages.getRecords()){
-            String ImgUrl = String.format("http://%s/pic/%s/%s.jpg", IPUtil.getCurrentIP(),bookInfoVO.getBookType(), bookInfoVO.getBookName());
-            bookInfoVO.setBookImgUrl(ImgUrl);
-        }
 
         return pages;
     }
@@ -106,13 +97,6 @@ public class BookServiceImpl implements BookService {
         bookType = bookType.trim();
         IPage<BookInfoVO> certainTypeBook = bookMapper.getBookPageByType(page,bookType);
         AssertUtil.isTrue(certainTypeBook.getTotal() == 0,"没有收录该类图书");
-
-        /* 加上图片url */
-        for (BookInfoVO bookInfoVO : certainTypeBook.getRecords()){
-            String ImgUrl = String.format("http://%s/pic/%s/%s.jpg", IPUtil.getCurrentIP(),bookInfoVO.getBookType(), bookInfoVO.getBookName());
-            bookInfoVO.setBookImgUrl(ImgUrl);
-        }
-
         return certainTypeBook;
     }
 

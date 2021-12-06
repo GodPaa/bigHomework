@@ -17,7 +17,7 @@ import java.util.List;
  **/
 @Mapper
 public interface BookMapper extends BaseMapper<Book> {
-    // 获取所有User，并分页
+    // 获取所有book，并分页
     IPage<BookInfoVO> searchBookPage(Page<BookInfoVO> page,BookSearchParam bookSearchParam);
 
     // 获取所有book类别
