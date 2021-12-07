@@ -1,5 +1,6 @@
 package com.group2.dingmall;
 
+import com.group2.dingmall.utils.IPUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,8 @@ public class Demo2Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Demo2Application.class, args);
+        System.out.println("swagger： "+ String.format("http://%s:8080/swagger-ui.html", IPUtil.getCurrentIP()));
+        System.out.println();
     }
 
 }
