@@ -82,7 +82,7 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        <!-- 非空校验注解 -->
+        <!-- 参数校验注解 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>

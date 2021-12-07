@@ -52,7 +52,7 @@ public class UserController {
     // 注册请求
     @PostMapping("/register")
     @ApiOperation(value = "用户注册", notes = "")
-    public Result register(@ApiParam("用户注册信息") @Valid UserRegisterParam userRegisterParam) {
+    public Result register(@Valid UserRegisterParam userRegisterParam) {
 
         Result result = new Result<>();
 
@@ -65,7 +65,7 @@ public class UserController {
 
     // 修改用户信息
     @PutMapping("/info")
-    @ApiOperation(value = "修改用户信息（不能改loginName和id）", notes = "")
+    @ApiOperation(value = "修改用户信息（不能改loginName和id）", notes = "需要token和修改表单")
     public Result updateInfo(@ApiParam("用户更新信息") @Valid  UserUpdateParam userUpdateParam, @TokenToUser User user) {
 
         Result result = new Result();
@@ -77,7 +77,7 @@ public class UserController {
 
     // 获取用户信息
     @GetMapping("/info")
-    @ApiOperation(value = "获取用户信息", notes = "")
+    @ApiOperation(value = "获取用户信息", notes = "需要token")
     public Result getUserDetail(@TokenToUser User user) {
         //已登录则直接返回
         Result result = new Result();

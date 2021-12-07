@@ -3,6 +3,7 @@ C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\ut
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\config\handler\TokenToUserMethodArgumentResolver.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\user\param\UserRegisterParam.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\BookController.java
+C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\po\BookCategory.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\service\mall\BookService.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\vo\BookInfoVO.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\service\user\UserServiceImpl.java
@@ -17,16 +18,20 @@ C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\co
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\config\MallWebMvcConfigurer.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\param\CertainTypeBookParam.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\Demo2Application.java
+C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\service\mall\BookCategoryService.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\po\User.java
+C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\vo\FirstLevelBookCategoryVO.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\user\vo\UserInfoVO.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\utils\Result.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\service\user\UserService.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\utils\ResultGenerator.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\ShoppingCartController.java
+C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\service\mall\BookCategoryServiceImpl.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\po\Book.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\utils\MD5Util.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\user\param\UserUpdateParam.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\dao\BookMapper.java
+C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\dao\BookCategoryMapper.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\OrderController.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\user\param\UserLoginParam.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\exceptions\ParamsException.java
@@ -35,5 +40,6 @@ C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\co
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\config\GlobalExceptionHandler.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\dao\UserTokenMapper.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\config\MybatisPlusConfig.java
+C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\vo\BookCategoryVO.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\utils\AssertUtil.java
 C:\Users\admin\Desktop\bigHomework\dingmall\src\main\java\com\group2\dingmall\controller\mall\param\BookSearchParam.java

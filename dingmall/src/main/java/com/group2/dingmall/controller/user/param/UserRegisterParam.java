@@ -24,7 +24,7 @@ public class UserRegisterParam implements Serializable {
     @NotEmpty(message = "登录名不能为空")
     private String loginName;
 
-    @ApiModelProperty("用户密码")
+    @ApiModelProperty("用户密码(不要加密)")
     @NotEmpty(message = "密码不能为空")
     private String password;
 }

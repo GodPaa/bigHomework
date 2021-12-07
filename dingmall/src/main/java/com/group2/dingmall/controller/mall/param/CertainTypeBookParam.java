@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class CertainTypeBookParam {
     @ApiModelProperty("书本类别")
-    @NotEmpty(message = "书本类别不能为空")
+    @NotEmpty(message = "书本类别参数不能为空")
     private String bookType;
 
     @ApiModelProperty("页码(默认是1，即显示第一页)")

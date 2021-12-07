@@ -39,22 +39,14 @@
         </if>
     </select>
     <!-- 获取书本类别列表 -->
-    <select id="getBookCategories" resultType="java.lang.String">
-        select label from book
-        where book_status=1
-        group by label;
-    </select>
+
 
 
     <!-- 获取某一类的所有书籍 -->
     <select id="getBookPageByType" resultType="com.group2.dingmall.controller.mall.vo.BookInfoVO">
         select * from book
         where
-              label = #{label}
+              label like CONCAT('%',#{bookType},'%')
           and book_status = 1
     </select>
-
-
-
-
 </mapper>

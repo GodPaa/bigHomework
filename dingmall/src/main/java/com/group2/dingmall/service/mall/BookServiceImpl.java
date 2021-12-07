@@ -8,12 +8,10 @@ import com.group2.dingmall.dao.BookMapper;
 import com.group2.dingmall.po.Book;
 import com.group2.dingmall.utils.AssertUtil;
 import com.group2.dingmall.utils.BeanUtil;
-import com.group2.dingmall.utils.IPUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @Author lv
@@ -74,19 +72,12 @@ public class BookServiceImpl implements BookService {
 
         /* 调用 dao 层的方法 */
         IPage<BookInfoVO> pages = bookMapper.searchBookPage(page,bookSearchParam);
+        AssertUtil.isTrue(pages.getTotal() == 0,"查不到,没有收录该类图书");
 
         return pages;
     }
 
-    /**
-     * 用于获取 书本分类页面导航栏的  list<book_type>
-     * @return
-     */
-    @Override
-    public List<String> getBookCategories() {
-        List<String> categoriesList = bookMapper.getBookCategories();
-        return categoriesList;
-    }
+
 
     /**
      * 用于获取 书本分类页面导航栏的  list<book_type>

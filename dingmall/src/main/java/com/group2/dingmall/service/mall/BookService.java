@@ -4,10 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.group2.dingmall.controller.mall.param.BookSearchParam;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
-import com.group2.dingmall.po.User;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
 public interface BookService {
     /**
      * 获取单个书本的信息
@@ -25,13 +24,7 @@ public interface BookService {
 
 
     /**
-     * 获取 list<书本类别> , 用于书本分类页面的 类别导航栏
-     * @return
-     */
-    List<String> getBookCategories();
-
-    /**
-     * 分页获取 list<书本类别> , 用于书本分类页面的 类别导航栏
+     * 分页获取 list<书本>
      * @return
      */
     IPage<BookInfoVO> getBookPageByType(Page<BookInfoVO> page, String bookType);
