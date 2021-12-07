@@ -1,0 +1,202 @@
+
+drop database if exists dingmall;
+
+create database dingmall;
+USE `dingmall`;
+
+
+-- 用户表--
+CREATE TABLE `user` (
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户主键id',
+  `nick_name` varchar(50) NOT NULL DEFAULT '' COMMENT '用户昵称',
+  `login_name` varchar(11) NOT NULL DEFAULT '' COMMENT '登陆名称(默认为手机号)',
+  `password_md5` varchar(32) NOT NULL DEFAULT '' COMMENT 'MD5加密后的密码',
+  `introduce_sign` varchar(100) NOT NULL DEFAULT '' COMMENT '个性签名',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '注销标识字段(0-正常 1-已注销)',
+  `locked_flag` tinyint(4) NOT NULL DEFAULT '0' COMMENT '锁定标识字段(0-未锁定 1-已锁定)',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `user` (`nick_name`, `login_name`, `password_md5`, `introduce_sign`, `is_deleted`, `locked_flag`, `create_time`)
+VALUES
+	('吕璟源','admin','e10adc3949ba59abbe56e057f20f883e','我不怕千万人阻挡，只怕自己投降',0,0,'2020-05-22 08:44:57'),
+	('许家彰','root','e10adc3949ba59abbe56e057f20f883e','测试用户陈尼克',0,0,'2020-05-22 08:44:57');
+
+
+-- user_token --
+CREATE TABLE `user_token` (
+  `user_id` bigint(20) NOT NULL COMMENT '用户主键id',
+  `token` varchar(32) NOT NULL COMMENT 'token值(32位字符串)',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `expire_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'token过期时间',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `uq_token` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- 书本类别 --
+CREATE TABLE `book_category` (
+  `category_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '分类id',
+  `category_level` tinyint(4) NOT NULL DEFAULT '0' COMMENT '分类级别(1-一级分类 2-二级分类)',
+  `parent_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '父分类id',
+  `category_name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除标识字段(0-未删除 1-已删除)',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `create_user` int(11) NOT NULL DEFAULT '1' COMMENT '创建者id',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  `update_user` int(11) DEFAULT '1' COMMENT '修改者id',
+  PRIMARY KEY (`category_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (1,0,'文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'小说');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'外国文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'经典');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'中国文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'随笔');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'日本文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'散文');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'村上春树');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'诗歌');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'童话');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'名著');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'儿童文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'古典文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'余华');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'王小波');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'当代文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'杂文');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'张爱玲');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'外国名著');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'鲁迅');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'钱钟书');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'诗词');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'茨威格');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'米兰·昆德拉');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'杜拉斯');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,1,'港台');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (1,0,'流行');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'漫画');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'推理');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'绘本');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'悬疑');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'东野圭吾');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'青春');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'科幻');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'言情');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'推理小说');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'奇幻');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'武侠');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'日本漫画');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'耽美');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'科幻小说');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'网络小说');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'三毛');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'韩寒');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'亦舒');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'阿加莎·克里斯蒂');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'金庸');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'穿越');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'安妮宝贝');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'魔幻');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'轻小说');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'郭敬明');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'青春文学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'几米');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'J.K.罗琳');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'幾米');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'张小娴');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'校园');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'古龙');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'高木直子');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'沧月');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'余秋雨');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,2,'张悦然');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (1,0,'文化');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'历史');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'心理学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'哲学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'社会学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'传记');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'文化');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'艺术');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'社会');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'政治');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'设计');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'政治学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'宗教');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'建筑');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'电影');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'中国历史');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'数学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'回忆录');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'思想');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'人物传记');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'艺术史');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'国学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'人文');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'音乐');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'绘画');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'戏剧');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'西方哲学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'近代史');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'二战');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'军事');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'佛教');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'考古');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'自由主义');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,3,'美术');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (1,0,'生活');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'爱情');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'成长');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'生活');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'心理');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'女性');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'旅行');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'励志');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'教育');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'摄影');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'职场');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'美食');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'游记');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'灵修');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'健康');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'情感');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'人际关系');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'两性');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'养生');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'手工');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'家居');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,4,'自助游');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (1,0,'经管');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'经济学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'管理');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'经济');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'商业');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'金融');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'投资');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'营销');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'理财');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'创业');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'股票');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'广告');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'企业史');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,5,'策划');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (1,0,'科技');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'科普');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'互联网');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'科学');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'编程');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'交互设计');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'算法');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'用户体验');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'科技');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'web');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'交互');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'通信');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'UE');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'神经网络');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'UCD');
+INSERT INTO `book_category` (`category_level`, `parent_id`, `category_name`)VALUES (2,6,'程序');

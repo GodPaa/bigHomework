@@ -125,8 +125,8 @@ public class UserServiceImpl implements UserService {
     public UserInfoVO getUserInfo(User user) {
         UserInfoVO userInfoVO = new UserInfoVO();
         userInfoVO.setNickName(user.getNickName());
-        userInfoVO.setLoginName(userInfoVO.getLoginName());
-        userInfoVO.setIntroduceSign(userInfoVO.getIntroduceSign());
+        userInfoVO.setLoginName(user.getLoginName());
+        userInfoVO.setIntroduceSign(user.getIntroduceSign());
         return userInfoVO;
     }
 
