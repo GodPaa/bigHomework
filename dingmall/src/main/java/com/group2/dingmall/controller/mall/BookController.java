@@ -60,7 +60,7 @@ public class BookController {
      */
     @GetMapping("/search")
     @ApiOperation(value = "关键字搜索书本接口", notes = "返回搜索结果：根据关键字、书标签、作者进行检索(三者必选其一)，也可以按time和price排序,默认按评分排序")
-    public Result search(@RequestBody BookSearchParam bookSearchParam){
+    public Result search(BookSearchParam bookSearchParam){
         System.out.println(bookSearchParam.toString());
         Result result = new Result();
         Page<BookInfoVO> page = new Page<>(bookSearchParam.getPageNumber() , bookSearchParam.getPageSize());

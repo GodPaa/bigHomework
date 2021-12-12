@@ -6,6 +6,7 @@ package com.group2.dingmall.controller.mall.param;
  * @Description
  **/
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 

@@ -130,6 +130,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
 
+
     /************************   封装的方法   ************************/
 
     @Override
