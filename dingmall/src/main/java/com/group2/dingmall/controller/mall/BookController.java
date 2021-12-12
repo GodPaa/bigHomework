@@ -3,7 +3,7 @@ package com.group2.dingmall.controller.mall;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.group2.dingmall.controller.mall.param.CertainTypeBookParam;
-import com.group2.dingmall.controller.mall.vo.BookCategoryVO;
+import com.group2.dingmall.controller.mall.vo.Lv1BookCategoryVO;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
 import com.group2.dingmall.controller.mall.param.BookSearchParam;
 import com.group2.dingmall.service.mall.BookCategoryService;
@@ -59,8 +59,9 @@ public class BookController {
      * @return
      */
     @GetMapping("/search")
-    @ApiOperation(value = "关键字搜索书本接口", notes = "返回搜索结果：根据关键字、书标签、作者进行检索，也可以按time和price排序,默认按评分排序")
-    public Result search(BookSearchParam bookSearchParam){
+    @ApiOperation(value = "关键字搜索书本接口", notes = "返回搜索结果：根据关键字、书标签、作者进行检索(三者必选其一)，也可以按time和price排序,默认按评分排序")
+    public Result search(@RequestBody BookSearchParam bookSearchParam){
+        System.out.println(bookSearchParam.toString());
         Result result = new Result();
         Page<BookInfoVO> page = new Page<>(bookSearchParam.getPageNumber() , bookSearchParam.getPageSize());
         IPage<BookInfoVO> bookIPage =  bookService.searchBookPage(page,bookSearchParam);
@@ -78,8 +79,9 @@ public class BookController {
     @ApiOperation(value = "图书分类查询结果接口",notes = "用户点击类别标签，返回某一类的list<书本>")
     public Result getBookPageByType(@Valid CertainTypeBookParam certainTypeBookParam){
         Result result = new Result();
-        Page<BookInfoVO> page = new Page<>(certainTypeBookParam.getPageNumber(),certainTypeBookParam.getPageSize());
-        IPage<BookInfoVO> bookPage =  bookService.getBookPageByType(page,certainTypeBookParam.getBookType());
+        System.out.println(certainTypeBookParam.toString());
+        Page<BookInfoVO> page = new Page<>(certainTypeBookParam.getPageNumber(),certainTypeBookParam.getPageSize(),50);
+        IPage<BookInfoVO> bookPage =  bookService.getBookPageByType(page,certainTypeBookParam.getTypeId());
         result.setData(bookPage);
         return result;
     }
@@ -87,15 +89,15 @@ public class BookController {
 
     /**
      * 分类标签页面接口：
-     *      返回一级标签和二级标签
+     *      返回一级标签(封装这二级标签)
      * @return
      */
     @GetMapping("/categories")
     @ApiOperation(value = "分类标签页面接口",notes = "返回一级标签和二级标签")
     public Result getBookCategories(){
         Result result = new Result();
-        List<BookCategoryVO> bookCategoryVOList = bookCategoryService.getBookCategories();
-        result.setData(bookCategoryVOList);
+        List<Lv1BookCategoryVO> lv1BookCategoryVOList = bookCategoryService.getBookCategories();
+        result.setData(lv1BookCategoryVOList);
         return result;
     }
 

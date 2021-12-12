@@ -1,8 +1,9 @@
 package com.group2.dingmall.service.mall;
 
-import com.group2.dingmall.controller.mall.vo.BookCategoryVO;
+import com.group2.dingmall.controller.mall.vo.Lv1BookCategoryVO;
+import com.group2.dingmall.controller.mall.vo.Lv2BookCategoryVO;
 import com.group2.dingmall.dao.BookCategoryMapper;
-import com.group2.dingmall.utils.IPUtil;
+import com.group2.dingmall.utils.AssertUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,15 +25,27 @@ public class BookCategoryServiceImpl implements BookCategoryService {
      * @return
      */
     @Override
-    public List<BookCategoryVO> getBookCategories() {
+    public List<Lv1BookCategoryVO> getBookCategories() {
 
-        List<BookCategoryVO> firstLevelBookCategoryList = bookCategoryMapper.getBookCategories();
+        List<Lv1BookCategoryVO> firstLevelBookCategoryList = bookCategoryMapper.getBookCategories();
         System.out.println(1);
-        for(BookCategoryVO firstCategory : firstLevelBookCategoryList){
+        for(Lv1BookCategoryVO firstCategory : firstLevelBookCategoryList){
             /* 设置二级分类标签 */
-            List<String> secondLevelCategoryList = bookCategoryMapper.getSecondCategoryList(firstCategory.getCategoryId());
+            List<Lv2BookCategoryVO> secondLevelCategoryList = bookCategoryMapper.getSecondCategoryList(firstCategory.getCategoryId());
             firstCategory.setSecondLevelBookCategoryList(secondLevelCategoryList);
         }
         return firstLevelBookCategoryList;
+    }
+
+    /**
+     * 用于获取首页的顶部分类标签
+     * @return
+     */
+    @Override
+    public List<Lv2BookCategoryVO> getFirstCategoryList() {
+        List<Lv2BookCategoryVO> labelList = bookCategoryMapper.getFirstLevelCategoryList();
+        AssertUtil.isTrue(labelList == null,"获取顶部导航信息出错");
+        System.out.println(labelList.toString());
+        return labelList;
     }
 }

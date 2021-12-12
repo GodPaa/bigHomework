@@ -3,7 +3,10 @@ package com.group2.dingmall.controller.mall.param;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @Author lv
@@ -13,9 +16,10 @@ import javax.validation.constraints.NotEmpty;
  **/
 @Data
 public class CertainTypeBookParam {
-    @ApiModelProperty("书本类别")
-    @NotEmpty(message = "书本类别参数不能为空")
-    private String bookType;
+    @ApiModelProperty("书本类别id")
+    @NotNull(message = "书本类别参数不能为空")
+    @DecimalMin(value = "1",message = "typeId > 0")
+    private long typeId;
 
     @ApiModelProperty("页码(默认是1，即显示第一页)")
     private Integer pageNumber = 1;

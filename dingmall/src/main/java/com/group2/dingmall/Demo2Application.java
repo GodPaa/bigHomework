@@ -14,7 +14,7 @@ public class Demo2Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Demo2Application.class, args);
-        System.out.println("swagger： "+ String.format("http://%s:8080/swagger-ui.html", IPUtil.getCurrentIP()));
+        System.out.println("swagger： "+ String.format("http://%s:8080/doc.html", IPUtil.getCurrentIP()));
         System.out.println();
     }
 

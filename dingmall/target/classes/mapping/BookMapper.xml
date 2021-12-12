@@ -49,4 +49,10 @@
               label like CONCAT('%',#{bookType},'%')
           and book_status = 1
     </select>
+
+    <!-- Top50书 -->
+    <select id="getHotBook" resultType="com.group2.dingmall.controller.mall.vo.CarouselInfoVO">
+        select * from book
+        order by score desc
+    </select>
 </mapper>

@@ -6,6 +6,8 @@ import com.group2.dingmall.controller.user.vo.UserInfoVO;
 import com.group2.dingmall.controller.user.vo.UserLoginVO;
 import com.group2.dingmall.po.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface UserService {
 
     /**
@@ -14,7 +16,7 @@ public interface UserService {
      * @param passwordMD5
      * @return
      */
-    UserLoginVO login(String loginName, String passwordMD5);
+    UserLoginVO login(String loginName, String passwordMD5, HttpServletRequest request);
 
     /**
      * 注册
@@ -27,18 +29,13 @@ public interface UserService {
      * 更改用户信息（不能改loginName）
      * @param userUpdateParam
      */
-    void update(UserUpdateParam userUpdateParam,long userId);
+    void update(UserUpdateParam userUpdateParam,String loginName);
 
-    /**
-     * 用户退出 （清楚token）
-     * @param userId
-     */
-    void logout(long userId);
 
     /**
      * 获取用户基本信息
-     * @param user
+     * @param username
      * @return
      */
-    UserInfoVO getUserInfo(User user);
+    User getUserInfo(String username);
 }

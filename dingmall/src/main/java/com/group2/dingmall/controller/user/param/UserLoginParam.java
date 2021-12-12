@@ -2,6 +2,8 @@ package com.group2.dingmall.controller.user.param;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,6 +12,8 @@ import java.io.Serializable;
  * 用户登录param
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class UserLoginParam implements Serializable {
 
     @ApiModelProperty("登录名")

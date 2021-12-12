@@ -1,7 +1,7 @@
 package com.group2.dingmall.config;
 
 
-import com.group2.dingmall.config.handler.TokenToUserMethodArgumentResolver;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -14,17 +14,6 @@ import java.util.List;
 @Configuration
 public class MallWebMvcConfigurer implements WebMvcConfigurer {
 
-    @Resource
-    private TokenToUserMethodArgumentResolver tokenToUserMethodArgumentResolver;
-
-
-    /**
-     * @param argumentResolvers
-     * @tip @TokenToMallUser @TokenToAdminUser 注解处理方法
-     */
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(tokenToUserMethodArgumentResolver);
-    }
 
     /**
      * 跨域配置

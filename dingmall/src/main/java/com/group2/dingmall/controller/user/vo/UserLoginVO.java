@@ -23,6 +23,7 @@ public class UserLoginVO implements Serializable {
     @ApiModelProperty("token")
     private String token;
 
-
+    @ApiModelProperty("token头")
+    private String tokenHead;
 
 }

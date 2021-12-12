@@ -2,8 +2,11 @@ package com.group2.dingmall.service.mall;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.group2.dingmall.controller.mall.param.BookSearchParam;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
+import com.group2.dingmall.controller.mall.vo.CarouselInfoVO;
+import com.group2.dingmall.dao.BookCategoryMapper;
 import com.group2.dingmall.dao.BookMapper;
 import com.group2.dingmall.po.Book;
 import com.group2.dingmall.utils.AssertUtil;
@@ -23,6 +26,8 @@ public class BookServiceImpl implements BookService {
 
     @Resource
     private BookMapper bookMapper;
+    @Resource
+    private BookCategoryMapper bookCategoryMapper;
 
     /**
      * 获取书本详细信息
@@ -84,13 +89,32 @@ public class BookServiceImpl implements BookService {
      * @return
      */
     @Override
-    public IPage<BookInfoVO> getBookPageByType(Page<BookInfoVO> page, String bookType) {
+    public IPage<BookInfoVO> getBookPageByType(Page<BookInfoVO> page, long typeId) {
+        String bookType = bookCategoryMapper.getNameById(typeId);
+        AssertUtil.isTrue(bookType == null,"没有收录该类图书");
         bookType = bookType.trim();
         IPage<BookInfoVO> certainTypeBook = bookMapper.getBookPageByType(page,bookType);
+        System.out.println(certainTypeBook.getTotal());
         AssertUtil.isTrue(certainTypeBook.getTotal() == 0,"没有收录该类图书");
         return certainTypeBook;
     }
 
+    /**
+     * 首页轮播图
+     *      获取50 个 book
+     * @param page
+     * @return
+     */
+    @Override
+    public IPage<CarouselInfoVO> getIndexBook(Page<CarouselInfoVO> page) {
+
+
+
+
+        IPage<CarouselInfoVO> certainTypeBook = bookMapper.getHotBook(page);
+        AssertUtil.isTrue(certainTypeBook.getTotal()<50,"获取热门书本出错");
+        return certainTypeBook;
+    }
 
 
 }

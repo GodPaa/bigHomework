@@ -26,3 +26,15 @@ logging:
     com:
       example:
         mapper : error
+
+
+jwt:
+  # JWT 存储的请求头
+  tokenHeader: Authorization
+  # JWT 加解密使用的密钥
+  secret: mall-secret
+  # JWT 的超期限时间 （60*60*24）
+  expiration: 604800
+  # JWT 负载中拿到的开头
+  tokenHead: Bearer
+

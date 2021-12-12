@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.group2.dingmall.controller.mall.param.BookSearchParam;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
+import com.group2.dingmall.controller.mall.vo.CarouselInfoVO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,5 +28,11 @@ public interface BookService {
      * 分页获取 list<书本>
      * @return
      */
-    IPage<BookInfoVO> getBookPageByType(Page<BookInfoVO> page, String bookType);
+    IPage<BookInfoVO> getBookPageByType(Page<BookInfoVO> page, long typeId);
+
+    /**
+     * 获取50张图用于首页轮播
+     * @return
+     */
+    IPage<CarouselInfoVO> getIndexBook(Page<CarouselInfoVO> page);
 }
