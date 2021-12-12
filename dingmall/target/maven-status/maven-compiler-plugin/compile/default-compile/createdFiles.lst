@@ -22,6 +22,7 @@ com\group2\dingmall\Demo2Application.class
 com\group2\dingmall\po\User.class
 com\group2\dingmall\config\security\ResultAccessDeniedHandler.class
 com\group2\dingmall\config\Swagger2Config.class
+com\group2\dingmall\service\user\UserAddressServiceImpl.class
 com\group2\dingmall\config\MybatisPlusConfig.class
 com\group2\dingmall\service\mall\BookService.class
 com\group2\dingmall\config\GlobalExceptionHandler.class
@@ -34,13 +35,16 @@ com\group2\dingmall\controller\mall\BookController.class
 com\group2\dingmall\config\security\ResultAuthenticationEntryPoint.class
 com\group2\dingmall\controller\user\param\UserLoginParam.class
 com\group2\dingmall\controller\user\UserController.class
+com\group2\dingmall\po\UserAddress.class
 com\group2\dingmall\utils\Result.class
 com\group2\dingmall\controller\mall\vo\Lv1BookCategoryVO.class
 com\group2\dingmall\controller\user\UserAddressController.class
 com\group2\dingmall\controller\user\vo\UserInfoVO.class
+com\group2\dingmall\service\user\UserAddressService.class
 com\group2\dingmall\controller\mall\vo\BookInCartVO.class
 com\group2\dingmall\controller\mall\vo\CarouselInfoVO.class
 com\group2\dingmall\config\MallWebMvcConfigurer.class
+com\group2\dingmall\controller\user\param\UserAddressParam.class
 com\group2\dingmall\controller\user\param\UserRegisterParam.class
 com\group2\dingmall\controller\user\vo\UserLoginVO.class
 com\group2\dingmall\utils\BeanUtil$Callback.class
@@ -49,6 +53,8 @@ com\group2\dingmall\controller\mall\param\CartItemParam.class
 com\group2\dingmall\utils\NumberUtil.class
 com\group2\dingmall\controller\user\param\UserUpdateParam.class
 com\group2\dingmall\service\user\UserService.class
+com\group2\dingmall\dao\UserAddressMapper.class
 com\group2\dingmall\controller\mall\vo\Lv2BookCategoryVO.class
+com\group2\dingmall\controller\user\vo\UserAddressVO.class
 com\group2\dingmall\service\user\UserServiceImpl.class
 com\group2\dingmall\config\security\SecurityConfig.class
