@@ -38,6 +38,9 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "登录接口", notes = "返回token")
     public Result userLogin(@RequestBody @Valid UserLoginParam user, HttpServletRequest request){
+        // 谁访问了我
+        String ip = request.getRemoteAddr();
+        System.out.println("wky的ip:"+ip);
         // 实例化统一响应结果
         Result result = new Result<>();
         // 调用service层的登录方法

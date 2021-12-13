@@ -44,7 +44,7 @@ public class BookController {
      * @return
      */
     @GetMapping("/detail/{bookId}")
-    @ApiOperation(value = "查询书本详情接口", notes = "返回书本详情,传过来的参为bookId")
+    @ApiOperation(value = "书本详情接口", notes = "返回书本详情,传过来的参为bookId")
     public Result getBookDetail(@PathVariable("bookId") Long bookId){
         Result result = new Result();
         BookInfoVO bookInfoVO = bookService.getBookInfo(bookId);

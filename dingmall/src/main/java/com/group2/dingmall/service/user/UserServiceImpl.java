@@ -48,7 +48,11 @@ public class UserServiceImpl implements UserService,UserDetailsService {
      */
     public UserLoginVO login(String loginName, String passwordMd5, String code, HttpServletRequest request){
         // 校验验证码
+
         String captcha = (String) request.getSession().getAttribute("captcha");
+        if (captcha == null){
+            System.out.println("captcha: null");
+        }
 //        AssertUtil.isTrue(!captcha.equalsIgnoreCase(code),"验证码不正确");
         // 登录
         UserDetails userDetails = loadUserByUsername(loginName);
