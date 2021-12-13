@@ -63,10 +63,10 @@ public class IndexController {
 
 
     // 2. 轮播图接口
-    // 总共50本书，分5页，每页10张
+    // 总共60本书，分5页，每页12张
     // 参数 ： 页数（第几页）
     @GetMapping("/carouse")
-    @ApiOperation(value = "首页轮播图接口",notes = "固定只提供50本书的信息，每页10本，分5页，参数为页数")
+    @ApiOperation(value = "首页轮播图接口",notes = "固定只提供60本书的信息，每页10本，分5页，参数为页数")
     public Result getCarouselInfo(long pageNum){
 
         // 不知道为什么 validate校验参数不行，这里手动校验
@@ -74,7 +74,7 @@ public class IndexController {
         AssertUtil.isTrue((pageNum < 1 || pageNum > 5),"输入的页面参数出错");
 
         Result result = new Result();
-        Page<CarouselInfoVO> page = new Page<>(pageNum,10);
+        Page<CarouselInfoVO> page = new Page<>(pageNum,12,60);
         IPage<CarouselInfoVO> bookPage =  bookService.getIndexBook(page);
         result.setData(bookPage);
         return result;

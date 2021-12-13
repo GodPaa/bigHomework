@@ -16,7 +16,7 @@ public interface UserService {
      * @param passwordMD5
      * @return
      */
-    UserLoginVO login(String loginName, String passwordMD5, HttpServletRequest request);
+    UserLoginVO login(String loginName, String passwordMD5, String code, HttpServletRequest request);
 
     /**
      * 注册

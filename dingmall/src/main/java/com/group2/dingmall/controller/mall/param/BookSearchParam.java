@@ -11,7 +11,9 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Value;
+import lombok.experimental.Accessors;
 import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,6 +23,8 @@ import javax.validation.constraints.NotNull;
  * 搜索book的参数
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 public class BookSearchParam {
     @ApiModelProperty("书本标签")
     private String label;

@@ -59,7 +59,7 @@ public class Swagger2Config {
     private List<SecurityContext> securityContexts(){
         // 设置需要登录认证的路劲
         List<SecurityContext> result = new ArrayList<>();
-        result.add(getContextByPath("/user/info"));
+        result.add(getContextByPath("/cart/.*"));
         return result;
     }
 

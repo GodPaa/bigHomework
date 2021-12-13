@@ -21,4 +21,10 @@ public interface UserAddressService{
 
     // 添加用户地址
     void addUserAddress(UserAddressParam userAddressParam, String loginName);
+
+    // 修改用户地址
+    void updateUserAddress(UserAddressParam userAddressParam, String loginName);
+
+    // 删除用户地址
+    void deleteUserAddress(String loginName);
 }

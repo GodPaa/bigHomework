@@ -107,12 +107,8 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public IPage<CarouselInfoVO> getIndexBook(Page<CarouselInfoVO> page) {
-
-
-
-
         IPage<CarouselInfoVO> certainTypeBook = bookMapper.getHotBook(page);
-        AssertUtil.isTrue(certainTypeBook.getTotal()<50,"获取热门书本出错");
+        AssertUtil.isTrue(certainTypeBook.getTotal()<60,"获取热门书本出错");
         return certainTypeBook;
     }
 

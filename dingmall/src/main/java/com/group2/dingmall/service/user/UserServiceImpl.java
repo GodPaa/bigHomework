@@ -6,11 +6,8 @@ import com.group2.dingmall.config.security.JwtTokenUtil;
 import com.group2.dingmall.controller.user.param.UserUpdateParam;
 import com.group2.dingmall.dao.UserMapper;
 import com.group2.dingmall.controller.user.vo.UserLoginVO;
-import com.group2.dingmall.exceptions.ParamsException;
 import com.group2.dingmall.po.User;
 import com.group2.dingmall.utils.AssertUtil;
-import com.group2.dingmall.utils.NumberUtil;
-import com.group2.dingmall.utils.SystemUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 /**
  * @Author lv
@@ -50,17 +46,18 @@ public class UserServiceImpl implements UserService,UserDetailsService {
      * @param loginName
      * @param passwordMd5
      */
-    public UserLoginVO login(String loginName, String passwordMd5, HttpServletRequest request){
+    public UserLoginVO login(String loginName, String passwordMd5, String code, HttpServletRequest request){
+        // 校验验证码
+        String captcha = (String) request.getSession().getAttribute("captcha");
+//        AssertUtil.isTrue(!captcha.equalsIgnoreCase(code),"验证码不正确");
         // 登录
         UserDetails userDetails = loadUserByUsername(loginName);
-        System.out.println(passwordEncoder.encode("123"));
         AssertUtil.isTrue(null == userDetails || !passwordEncoder.matches(passwordMd5,userDetails.getPassword()),"用户名或密码不正确");
         AssertUtil.isTrue(!userDetails.isEnabled(),"账号被禁用,请联系管理员！");
 
-        // 更新登录
+        // 更新登录()
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
 
         // 生成token
         String token = jwtTokenUtil.generateToken(userDetails);

@@ -60,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/doc.html",
                 "/webjars/**",
                 "/swagger-resources/**",
-                "/v2/api-docs/**"
+                "/v2/api-docs/**",
+                "/captcha"
         );
     }
 
@@ -96,7 +97,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return username ->{
             User user = userService.getUserInfo(username);
             if (user != null){
-                System.out.println("哈哈哈哈我被赚了");
                 return (UserDetails) user;
             }
             return null;
