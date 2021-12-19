@@ -26,14 +26,14 @@
             <choose>
                 <when test="bookSearchParam.orderBy == 'time'">
                     /* 最新 */
-                    order by year_of_publication desc
+                    mallOrder by year_of_publication desc
                 </when>
                 <when test="bookSearchParam.orderBy == 'price'">
                     /* 最便宜 */
-                    order by current_price asc
+                    mallOrder by current_price asc
                 </when>
                 <otherwise>
-                    order by score asc
+                    mallOrder by score asc
                 </otherwise>
             </choose>
         </if>
@@ -53,6 +53,6 @@
     <!-- Top60书 -->
     <select id="getHotBook" resultType="com.group2.dingmall.controller.mall.vo.CarouselInfoVO">
         select * from book
-        order by score desc
+        mallOrder by score desc
     </select>
 </mapper>

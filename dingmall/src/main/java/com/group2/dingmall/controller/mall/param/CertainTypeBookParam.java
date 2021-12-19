@@ -1,6 +1,7 @@
 package com.group2.dingmall.controller.mall.param;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import javax.validation.constraints.DecimalMin;
@@ -19,7 +20,7 @@ public class CertainTypeBookParam {
     @ApiModelProperty("书本类别id")
     @NotNull(message = "书本类别参数不能为空")
     @DecimalMin(value = "1",message = "typeId > 0")
-    private long typeId;
+    private Integer typeId;
 
     @ApiModelProperty("页码(默认是1，即显示第一页)")
     private Integer pageNumber = 1;

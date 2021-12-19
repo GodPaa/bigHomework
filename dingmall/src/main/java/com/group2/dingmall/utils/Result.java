@@ -13,6 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Result<T> {
 
+    public Result(Object data){
+        this.data = (T) data;
+    }
+
     //业务码，比如成功、失败、权限不足等 code，可自行定义
     @ApiModelProperty("返回码")
     private int code = 200;

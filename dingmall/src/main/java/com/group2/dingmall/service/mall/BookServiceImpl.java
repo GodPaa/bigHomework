@@ -41,9 +41,14 @@ public class BookServiceImpl implements BookService {
         Book book = bookMapper.selectById(bookId);
         AssertUtil.isTrue(book == null,"查无此书");
 
+        /* 设置标签（str ——> str[] ） */
+        String str = book.getLabel();
+        String[] label = str.split("/");
+
         /* 封装返回的data */
         BookInfoVO bookInfoVO = new BookInfoVO();
         BeanUtil.copyProperties(book, bookInfoVO);
+        bookInfoVO.setLabel(label);
         return bookInfoVO;
     }
 
@@ -77,6 +82,15 @@ public class BookServiceImpl implements BookService {
 
         /* 调用 dao 层的方法 */
         IPage<BookInfoVO> pages = bookMapper.searchBookPage(page,bookSearchParam);
+        for (BookInfoVO bookInfoVO : pages.getRecords()){
+            Book book = bookMapper.selectById(bookInfoVO.getId());
+        /* 设置标签（str ——> str[] ） */
+            String str = book.getLabel();
+            String[] label2 = str.split("/");
+            bookInfoVO.setLabel(label2);
+        }
+
+
         AssertUtil.isTrue(pages.getTotal() == 0,"查不到,没有收录该类图书");
 
         return pages;
@@ -94,7 +108,13 @@ public class BookServiceImpl implements BookService {
         AssertUtil.isTrue(bookType == null,"没有收录该类图书");
         bookType = bookType.trim();
         IPage<BookInfoVO> certainTypeBook = bookMapper.getBookPageByType(page,bookType);
-        System.out.println(certainTypeBook.getTotal());
+        for (BookInfoVO bookInfoVO : certainTypeBook.getRecords()){
+            Book book = bookMapper.selectById(bookInfoVO.getId());
+            /* 设置标签（str ——> str[] ） */
+            String str = book.getLabel();
+            String[] label2 = str.split("/");
+            bookInfoVO.setLabel(label2);
+        }
         AssertUtil.isTrue(certainTypeBook.getTotal() == 0,"没有收录该类图书");
         return certainTypeBook;
     }

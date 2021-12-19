@@ -26,7 +26,7 @@ public class BookInfoVO implements Serializable {
     @ApiModelProperty("出版社")
     private String publishingHouse;
     @ApiModelProperty("书本标签")
-    private String label;
+    private String[] label;
     @ApiModelProperty("图片地址")
     private String imgUrl;
     @ApiModelProperty("书本状态")

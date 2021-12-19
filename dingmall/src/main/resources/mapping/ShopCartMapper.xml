@@ -5,12 +5,12 @@
 
 
 
-<mapper namespace="com.group2.dingmall.dao.ShopCartMapper">
+<mapper namespace="com.group2.dingmall.dao.ShopCartItemMapper">
 
 
     <!-- 根据id查找购物项 -->
-    <select id="getCartById" resultType="com.group2.dingmall.po.ShopCart">
-        select * from shop_cart
+    <select id="getCartById" resultType="com.group2.dingmall.po.ShopCartItem">
+        select * from shop_cart_item
         where book_id = #{bookId}
             and user_id = #{userId}
     </select>
