@@ -43,4 +43,6 @@ public class BookSearchParam {
 
     @ApiModelProperty("排序规则，只能是可以是time或price")
     private String orderBy;
+
+
 }

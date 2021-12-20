@@ -62,7 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/**",
                 "/v2/api-docs/**",
                 "/captcha",
-                "/comment/**"
+                "/comment/**",
+                "/adminUser",
+                "/adminCategory",
+                "/adminBook",
+                "/adminUser/{userId}",
+                "/adminBook/{bookId}"
         );
     }
 
@@ -80,6 +85,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
+                .cors()
+                .and()
                 // 禁用缓存
                 .headers()
                 .cacheControl();
@@ -90,6 +97,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .accessDeniedHandler(resultAccessDeniedHandler)
                 .authenticationEntryPoint(resultAuthenticationEntryPoint);
+
+        // 允许跨域访问
+        http.cors();
     }
 
     @Override

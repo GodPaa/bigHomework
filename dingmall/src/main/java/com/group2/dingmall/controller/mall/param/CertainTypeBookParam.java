@@ -18,8 +18,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class CertainTypeBookParam {
     @ApiModelProperty("书本类别id")
-    @NotNull(message = "书本类别参数不能为空")
-    @DecimalMin(value = "1",message = "typeId > 0")
+//    @NotNull(message = "书本类别参数不能为空")
     private Integer typeId;
 
     @ApiModelProperty("页码(默认是1，即显示第一页)")

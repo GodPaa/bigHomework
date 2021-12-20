@@ -55,7 +55,7 @@ public class ShopCartItemServiceImpl implements ShopCartItemService {
             System.out.println("追加购买");
             int count = cartWithThisBook.getBookCount()+cartItemParam.getBookCount();
             cartWithThisBook.setBookCount(count);
-            shopCartItemMapper.update(cartWithThisBook,new QueryWrapper<ShopCartItem>().eq("cart_id",cartWithThisBook.getCartItemId()));
+            shopCartItemMapper.update(cartWithThisBook,new QueryWrapper<ShopCartItem>().eq("cart_item_id",cartWithThisBook.getCartItemId()));
         }
         else {
             /* 如果book_id不存在存在，第一次购买 */
@@ -95,7 +95,7 @@ public class ShopCartItemServiceImpl implements ShopCartItemService {
             deleteGoodFromCart(cartItemParam.getBookId(),loginName);
         }else {
             cartWithThisBook.setBookCount(cartItemParam.getBookCount());
-            int update = shopCartItemMapper.update(cartWithThisBook,new QueryWrapper<ShopCartItem>().eq("cart_id",cartWithThisBook.getCartItemId()));
+            int update = shopCartItemMapper.update(cartWithThisBook,new QueryWrapper<ShopCartItem>().eq("cart_item_id",cartWithThisBook.getCartItemId()));
             AssertUtil.isTrue(update<1,"更改失败");
         }
 

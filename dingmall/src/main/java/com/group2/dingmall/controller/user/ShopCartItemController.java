@@ -63,7 +63,8 @@ public class ShopCartItemController {
     // 修改一件商品购物项的数量（为0则delete)
     @PutMapping("/book")
     @ApiOperation(value = "修改购物项数据", notes = "传参为购物项id、数量")
-    public Result updateGoodFromCart(@RequestBody CartItemParam cartItemParam, Principal principal){
+    public Result updateGoodFromCart(CartItemParam cartItemParam, Principal principal){
+        System.out.println("测试十四hi是:"+cartItemParam.getBookId());
         // 参数判断
         AssertUtil.isTrue(cartItemParam.getBookId() <=0,"book_id参数错误");
         AssertUtil.isTrue(cartItemParam.getBookCount() <0,"商品数量参数错误");

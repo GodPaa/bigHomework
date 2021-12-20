@@ -2,7 +2,6 @@ package com.group2.dingmall.controller.mall;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.group2.dingmall.controller.mall.param.CertainTypeBookParam;
 import com.group2.dingmall.controller.mall.vo.Lv1BookCategoryVO;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
 import com.group2.dingmall.controller.mall.param.BookSearchParam;
@@ -14,7 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -72,16 +70,15 @@ public class BookController {
     /**
      *  图书分类查询结果接口
      *          用户点击分类标签，后台返回 该类别的 list<书>
-     * @param certainTypeBookParam
+     * @param
      * @return
      */
     @GetMapping("/certainType")
     @ApiOperation(value = "图书分类查询结果接口",notes = "用户点击类别标签，返回某一类的list<书本>")
-    public Result getBookPageByType(@Valid CertainTypeBookParam certainTypeBookParam){
+    public Result getBookPageByType(Integer typeId,Integer pageNumber){
         Result result = new Result();
-        System.out.println(certainTypeBookParam.toString());
-        Page<BookInfoVO> page = new Page<>(certainTypeBookParam.getPageNumber(),certainTypeBookParam.getPageSize(),50);
-        IPage<BookInfoVO> bookPage =  bookService.getBookPageByType(page,certainTypeBookParam.getTypeId());
+        Page<BookInfoVO> page = new Page<>(pageNumber,100);
+        IPage<BookInfoVO> bookPage =  bookService.getBookPageByType(page,typeId);
         result.setData(bookPage);
         return result;
     }
