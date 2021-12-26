@@ -2,6 +2,7 @@ package com.group2.dingmall.controller.mall;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.group2.dingmall.controller.mall.param.CertainTypeBookParam;
 import com.group2.dingmall.controller.mall.vo.Lv1BookCategoryVO;
 import com.group2.dingmall.controller.mall.vo.BookInfoVO;
 import com.group2.dingmall.controller.mall.param.BookSearchParam;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 /**

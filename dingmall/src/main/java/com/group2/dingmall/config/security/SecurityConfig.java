@@ -67,7 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/adminCategory",
                 "/adminBook",
                 "/adminUser/{userId}",
-                "/adminBook/{bookId}"
+                "/adminBook/{bookId}",
+                "/adminAddress",
+                "/adminAddress/{user_Id}"
         );
     }
 

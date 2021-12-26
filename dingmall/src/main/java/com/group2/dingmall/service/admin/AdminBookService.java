@@ -1,5 +1,6 @@
 package com.group2.dingmall.service.admin;
 
+import com.group2.dingmall.controller.admin.param.BookParam;
 import com.group2.dingmall.po.Book;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface AdminBookService {
     //添加目录
-    void addBook(Book book);
+    void addBook(BookParam book);
     //删除目录（根据ID）
     void deleteBookById(Integer id);
     //获取目录列表

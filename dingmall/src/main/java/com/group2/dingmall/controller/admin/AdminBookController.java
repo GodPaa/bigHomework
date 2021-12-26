@@ -1,5 +1,6 @@
 package com.group2.dingmall.controller.admin;
 
+import com.group2.dingmall.controller.admin.param.BookParam;
 import com.group2.dingmall.po.Book;
 import com.group2.dingmall.service.admin.AdminBookService;
 import com.group2.dingmall.utils.Result;
@@ -26,9 +27,9 @@ public class AdminBookController {
     //增加书本
     @PostMapping("/adminBook")
     @ApiOperation(value = "insert",notes="增加书本")
-    public Result addBook(Book book){
+    public Result addBook(BookParam bookParam){
 
-        adminBookService.addBook(book);
+        adminBookService.addBook(bookParam);
 
         return new Result();
 

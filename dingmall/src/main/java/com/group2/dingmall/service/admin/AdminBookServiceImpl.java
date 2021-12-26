@@ -1,9 +1,11 @@
 package com.group2.dingmall.service.admin;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.group2.dingmall.controller.admin.param.BookParam;
 import com.group2.dingmall.dao.admin.AdminBookMapper;
 import com.group2.dingmall.po.Book;
 import com.group2.dingmall.utils.AssertUtil;
+import com.group2.dingmall.utils.BeanUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,8 +23,10 @@ public class AdminBookServiceImpl implements AdminBookService{
     @Resource
     private AdminBookMapper adminBookMapper;
     @Override
-    public void addBook(Book book) {
-        AssertUtil.isTrue(adminBookMapper.insert(book)<1,"添加书本错误");
+    public void addBook(BookParam book) {
+        Book book1 = new Book();
+        BeanUtil.copyProperties(book,book1);
+        AssertUtil.isTrue(adminBookMapper.insert(book1)<1,"添加书本错误");
     }
 
     @Override
@@ -40,7 +44,9 @@ public class AdminBookServiceImpl implements AdminBookService{
     public void updateBook(Book book) {
         long bookId = book.getId();
 
-        int upadte = adminBookMapper.update(book,new QueryWrapper<Book>().eq("id",bookId));
+        Book book1= new Book();
+        BeanUtil.copyProperties(book,book1);
+        int upadte = adminBookMapper.update(book1,new QueryWrapper<Book>().eq("id",bookId));
 
         AssertUtil.isTrue(upadte<1,"修改失败");
     }

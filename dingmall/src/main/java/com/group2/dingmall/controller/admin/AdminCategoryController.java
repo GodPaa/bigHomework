@@ -1,5 +1,6 @@
 package com.group2.dingmall.controller.admin;
 
+import com.group2.dingmall.controller.admin.param.CategoryParam;
 import com.group2.dingmall.po.BookCategory;
 import com.group2.dingmall.service.admin.AdminCategoryService;
 import com.group2.dingmall.utils.Result;
@@ -27,7 +28,7 @@ public class AdminCategoryController {
    //增加类别
    @PostMapping("/adminCategory")
    @ApiOperation(value = "insert",notes="增加类别")
-   public Result addCategory(BookCategory bookCategory){
+   public Result addCategory(CategoryParam bookCategory){
 
        adminCategoryService.addCategory(bookCategory);
 

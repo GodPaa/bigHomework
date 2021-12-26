@@ -1,9 +1,12 @@
 package com.group2.dingmall.service.admin;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.group2.dingmall.controller.admin.param.CategoryParam;
 import com.group2.dingmall.dao.admin.AdminCategoryMapper;
+import com.group2.dingmall.po.Book;
 import com.group2.dingmall.po.BookCategory;
 import com.group2.dingmall.utils.AssertUtil;
+import com.group2.dingmall.utils.BeanUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,8 +26,10 @@ public class AdminCategoryServiceImpl implements AdminCategoryService{
     private AdminCategoryMapper adminCategoryMapper;
     //增加类别
     @Override
-    public void addCategory(BookCategory category) {
-        AssertUtil.isTrue(adminCategoryMapper.insert(category)<1,"添加目录错误");
+    public void addCategory(CategoryParam category) {
+        BookCategory category1 = new BookCategory();
+        BeanUtil.copyProperties(category,category1);
+        AssertUtil.isTrue(adminCategoryMapper.insert(category1)<1,"添加目录错误");
     }
 
     //删除类别
